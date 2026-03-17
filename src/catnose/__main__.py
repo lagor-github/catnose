@@ -11,8 +11,8 @@ from ._core import transform
 
 
 def main() -> None:
-  parser = argparse.ArgumentParser(prog="catnose", description="Transforma un array JSON aplicando un mapeador declarativo.", epilog="\nEjemplos:\n  %(prog)s input.json transform.json\n  %(prog)s input.json transform.json -o output.json\n")
-  parser.add_argument("input", help="Fichero JSON de entrada (array de objetos)")
+  parser = argparse.ArgumentParser(prog="catnose", description="Transforma un array JSON o un objeto JSON aplicando un mapeador declarativo.", epilog="\nEjemplos:\n  %(prog)s input.json transform.json\n  %(prog)s input.json transform.json -o output.json\n")
+  parser.add_argument("input", help="Fichero JSON de entrada (array de objetos o un único objeto)")
   parser.add_argument("transform_file", metavar="transform", help="Fichero JSON de transformación (mapeador)")
   parser.add_argument("-o", "--output", metavar="FILE", help="Escribe el resultado en FILE (por defecto: stdout)")
   args = parser.parse_args()
@@ -27,8 +27,8 @@ def main() -> None:
     sys.exit(1)
 
   items = json.loads(input_path.read_text(encoding="utf-8"))
-  if not isinstance(items, list):
-    print("ERROR: el fichero de entrada debe ser un array JSON", file=sys.stderr)
+  if not isinstance(items, (list, dict)):
+    print("ERROR: el fichero de entrada debe ser un array JSON o un objeto JSON", file=sys.stderr)
     sys.exit(1)
 
   mapper = json.loads(transform_path.read_text(encoding="utf-8"))

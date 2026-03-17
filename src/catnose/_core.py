@@ -92,17 +92,27 @@ def _apply_list_sub_mappings(lst: list, sub_mappings: dict, row_ctx: dict) -> li
 # API pública
 # ---------------------------------------------------------------------------
 
-def transform(items: list, mapper: dict) -> list:
+def transform(items: list | dict, mapper: dict) -> list | dict:
   """
-  Transforma cada elemento del array `items` aplicando `mapper`.
+  Transforma cada elemento de `items` aplicando `mapper`.
 
-  El resultado de cada elemento parte de un objeto vacío; sólo se incluyen
-  los campos definidos en el mapeador.  El elemento original (más ``_rownum``
-  y los campos ya calculados) actúa como contexto de evaluación.
+  Si `items` es un objeto JSON (dict), se trata como una lista con un único
+  elemento y se le asigna ``_rownum = 1``.
 
-  :param items:  Array de objetos a transformar.
+  El resultado de cada elemento parte de un objeto vacío; sólo se incluyen los
+  campos definidos en el mapeador.  El elemento original (más ``_rownum`` y
+  los campos ya calculados) actúa como contexto de evaluación.
+
+  :param items:  Array de objetos a transformar, o un único objeto JSON.
   :param mapper: Descripción de las transformaciones (ver formato arriba).
   """
+  is_list = True
+  if isinstance(items, dict):
+    items = [items]
+    is_list = False
+  elif not isinstance(items, list):
+    raise TypeError("La entrada debe ser una lista o un objeto JSON")
+
   result = []
   for _rownum, row in enumerate(items, 1):
     new_item: dict = {}
@@ -116,4 +126,6 @@ def transform(items: list, mapper: dict) -> list:
         _apply_field_to_item(new_item, field, mapping, ctx)
       ctx.update(new_item)
     result.append(new_item)
+  if not is_list:
+    return result[0]
   return result
