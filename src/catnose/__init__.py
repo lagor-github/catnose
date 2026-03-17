@@ -19,4 +19,4 @@ from ._core import transform
 from . import _template as template_engine
 
 __all__ = ["transform", "template_engine"]
-__version__ = "1.1.0"
+__version__ = "1.2.0"

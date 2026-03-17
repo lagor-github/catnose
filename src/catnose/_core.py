@@ -40,8 +40,9 @@ _K_NAME    = "_name"
 _K_CASES   = "_cases"
 _K_VALUE   = "_value"
 _K_DEFAULT = "_default"
+_K_COMMENT = "_comment"
 
-_MAPPING_CONTROL_KEYS = frozenset((_K_NAME, _K_CASES, _K_VALUE))
+_MAPPING_CONTROL_KEYS = frozenset((_K_NAME, _K_CASES, _K_VALUE, _K_COMMENT))
 
 
 # ---------------------------------------------------------------------------
