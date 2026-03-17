@@ -1,6 +1,4 @@
-![catnose](https://raw.githubusercontent.com/lagor-github/catnose/main/logo/catnose256.png)
-# catnose
-
+![catnose](logo/catnose256.png)
 Motor de transformación declarativa de JSON con lenguaje de plantillas integrado.
 
 ## Instalación
