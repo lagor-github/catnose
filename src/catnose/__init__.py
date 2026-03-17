@@ -15,7 +15,7 @@ Para usar el motor de plantillas directamente::
     html = template_engine.render("Hola {{ name }}", {"name": "mundo"})
 """
 
-from ._core import transform, _parse_list
+from ._core import transform
 from . import _template as template_engine
 
 __all__ = ["transform", "template_engine"]

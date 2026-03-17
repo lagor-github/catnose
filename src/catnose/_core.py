@@ -97,16 +97,16 @@ def transform(items: list, mapper: dict) -> list:
   Transforma cada elemento del array `items` aplicando `mapper`.
 
   El resultado de cada elemento parte de un objeto vacío; sólo se incluyen
-  los campos definidos en el mapeador.  El elemento original (más ``rownum``
+  los campos definidos en el mapeador.  El elemento original (más ``_rownum``
   y los campos ya calculados) actúa como contexto de evaluación.
 
   :param items:  Array de objetos a transformar.
   :param mapper: Descripción de las transformaciones (ver formato arriba).
   """
   result = []
-  for rownum, row in enumerate(items, 1):
+  for _rownum, row in enumerate(items, 1):
     new_item: dict = {}
-    ctx = {**row, "rownum": rownum}
+    ctx = {**row, "_rownum": _rownum}
     for field, mapping in mapper.items():
       if isinstance(mapping, str):
         new_item[field] = ctx.get(mapping)

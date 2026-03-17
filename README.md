@@ -1,3 +1,4 @@
+![catslap](./logo/catnose256.png)
 # catnose
 
 Motor de transformación declarativa de JSON con lenguaje de plantillas integrado.
@@ -86,7 +87,7 @@ Las expresiones `_value` usan la sintaxis `{{ expr }}` con evaluación Python co
 El contexto de evaluación incluye:
 - Todos los campos del JSON original
 - Los campos ya calculados por mappings anteriores (en orden)
-- `rownum` (1..N, posición del elemento en el array)
+- `_rownum` (1..N, posición del elemento en el array)
 
 Para campos de tipo lista, el contexto incluye además los campos de cada elemento de la lista.
 
